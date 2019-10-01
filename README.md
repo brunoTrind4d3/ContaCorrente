@@ -3,4 +3,4 @@
 ## 3° período em ADS - Arquitetura e projeto de software/ Gestão de projetos
 
 
-##### Alunos: Bruno Leonardo, kevin Eduardo, Matheus Borba, Marcelo Rodrigues, Santiago Bernardes
+##### Alunos: Bruno Leonardo, Kevin Eduardo, Matheus Borba, Marcelo Rodrigues, Santiago Bernardes
