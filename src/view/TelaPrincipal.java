@@ -33,8 +33,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pnCentral = new javax.swing.JPanel();
         pnInferior = new javax.swing.JPanel();
-        lbFraseMotivadora = new javax.swing.JLabel();
-        lbCriador = new javax.swing.JLabel();
         pnTitulo = new javax.swing.JPanel();
         lbPrincipal = new javax.swing.JLabel();
         btCadastrar = new javax.swing.JButton();
@@ -48,16 +46,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pnInferior.setBackground(new java.awt.Color(0, 0, 255));
         pnInferior.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnInferior.setPreferredSize(new java.awt.Dimension(360, 70));
-
-        lbFraseMotivadora.setFont(new java.awt.Font("Arial Black", 2, 12)); // NOI18N
-        lbFraseMotivadora.setForeground(new java.awt.Color(255, 255, 255));
-        lbFraseMotivadora.setText("teste de digitação");
-        pnInferior.add(lbFraseMotivadora);
-
-        lbCriador.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        lbCriador.setForeground(new java.awt.Color(255, 255, 255));
-        lbCriador.setText("Criador");
-        pnInferior.add(lbCriador);
 
         pnTitulo.setBackground(new java.awt.Color(51, 51, 255));
         pnTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -165,8 +153,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btControle;
-    private javax.swing.JLabel lbCriador;
-    private javax.swing.JLabel lbFraseMotivadora;
     private javax.swing.JLabel lbPrincipal;
     private javax.swing.JPanel pnCentral;
     private javax.swing.JPanel pnInferior;

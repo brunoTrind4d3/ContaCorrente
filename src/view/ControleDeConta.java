@@ -5,22 +5,21 @@
  */
 package view;
 
-
+import bd.ContaOBDC;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.Conta;
 
 /**
  *
  * @author aluno
  */
 public class ControleDeConta extends javax.swing.JFrame {
-
-
-
+    
     public ControleDeConta() throws IOException {
-
+        
         initComponents();
     }
 
@@ -37,8 +36,6 @@ public class ControleDeConta extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         pnCentral = new javax.swing.JPanel();
         pnInferior = new javax.swing.JPanel();
-        lbFraseMotivadora = new javax.swing.JLabel();
-        lbCriador = new javax.swing.JLabel();
         pnTitulo = new javax.swing.JPanel();
         lbPrincipal = new javax.swing.JLabel();
         pnTabela = new javax.swing.JPanel();
@@ -67,16 +64,6 @@ public class ControleDeConta extends javax.swing.JFrame {
         pnInferior.setBackground(new java.awt.Color(0, 0, 255));
         pnInferior.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnInferior.setPreferredSize(new java.awt.Dimension(360, 70));
-
-        lbFraseMotivadora.setFont(new java.awt.Font("Arial Black", 2, 12)); // NOI18N
-        lbFraseMotivadora.setForeground(new java.awt.Color(255, 255, 255));
-        lbFraseMotivadora.setText("teste de digitação");
-        pnInferior.add(lbFraseMotivadora);
-
-        lbCriador.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
-        lbCriador.setForeground(new java.awt.Color(255, 255, 255));
-        lbCriador.setText("Criador");
-        pnInferior.add(lbCriador);
 
         pnTitulo.setBackground(new java.awt.Color(51, 51, 255));
         pnTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -121,6 +108,11 @@ public class ControleDeConta extends javax.swing.JFrame {
 
         brCriar.setBackground(new java.awt.Color(255, 255, 255));
         brCriar.setText("Criar");
+        brCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brCriarActionPerformed(evt);
+            }
+        });
         pnTabela.add(brCriar);
 
         btAlterar.setBackground(new java.awt.Color(255, 255, 255));
@@ -128,7 +120,7 @@ public class ControleDeConta extends javax.swing.JFrame {
         pnTabela.add(btAlterar);
 
         btSalvar.setBackground(new java.awt.Color(255, 255, 255));
-        btSalvar.setText("Salvar");
+        btSalvar.setText("Consultar");
         btSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSalvarActionPerformed(evt);
@@ -186,12 +178,29 @@ public class ControleDeConta extends javax.swing.JFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         
-        
+
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        
+
     }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void brCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brCriarActionPerformed
+        try {
+            Integer contaBanco = Integer.parseInt(tfBanco.getText());
+            Integer agenciaBanco = Integer.parseInt(tfAgencia.getText());
+            String conta = tfConta.getText();
+            Float saldoInicial = Float.parseFloat(tfSaldoInicial.getText());
+            String situacaoConta = "a";
+            
+            Conta contaCorrente = new Conta(contaBanco, agenciaBanco, conta, saldoInicial, situacaoConta);
+            ContaOBDC contaObdc = new ContaOBDC();
+            contaObdc.inserirConta(contaCorrente);
+        } catch (Exception ex) {
+            Logger.getLogger(ControleDeConta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_brCriarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,8 +255,6 @@ public class ControleDeConta extends javax.swing.JFrame {
     private javax.swing.JLabel lbAgencia;
     private javax.swing.JLabel lbBanco;
     private javax.swing.JLabel lbConta;
-    private javax.swing.JLabel lbCriador;
-    private javax.swing.JLabel lbFraseMotivadora;
     private javax.swing.JLabel lbPrincipal;
     private javax.swing.JPanel pnCentral;
     private javax.swing.JPanel pnInferior;
