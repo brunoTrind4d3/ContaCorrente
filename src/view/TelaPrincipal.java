@@ -18,8 +18,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
-    public TelaPrincipal() {
+    public TelaPrincipal()  {
         initComponents();
+       
+ 
+
     }
 
     /**
@@ -31,89 +34,77 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnCentral = new javax.swing.JPanel();
-        pnInferior = new javax.swing.JPanel();
-        pnTitulo = new javax.swing.JPanel();
-        lbPrincipal = new javax.swing.JLabel();
-        btCadastrar = new javax.swing.JButton();
-        btControle = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1_TelaPrincipal = new javax.swing.JLabel();
+        jButton1_ControleDeConta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Controle de Conta");
 
-        pnCentral.setBackground(new java.awt.Color(255, 255, 255));
-        pnCentral.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        pnInferior.setBackground(new java.awt.Color(0, 0, 255));
-        pnInferior.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        pnInferior.setPreferredSize(new java.awt.Dimension(360, 70));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 550, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 470, Short.MAX_VALUE)
+        );
 
-        pnTitulo.setBackground(new java.awt.Color(51, 51, 255));
-        pnTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel1_TelaPrincipal.setFont(new java.awt.Font("Arial", 1, 56)); // NOI18N
+        jLabel1_TelaPrincipal.setText("Tela Principal");
 
-        lbPrincipal.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        lbPrincipal.setForeground(new java.awt.Color(255, 255, 255));
-        lbPrincipal.setText("TELA PRINCIPAL");
-        pnTitulo.add(lbPrincipal);
-
-        btCadastrar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btCadastrar.setText("Cadastrar/Alterar");
-        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1_ControleDeConta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jButton1_ControleDeConta.setText("Controle de Conta");
+        jButton1_ControleDeConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCadastrarActionPerformed(evt);
+                jButton1_ControleDeContaActionPerformed(evt);
             }
         });
-
-        btControle.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btControle.setText("Controle da Conta");
-
-        javax.swing.GroupLayout pnCentralLayout = new javax.swing.GroupLayout(pnCentral);
-        pnCentral.setLayout(pnCentralLayout);
-        pnCentralLayout.setHorizontalGroup(
-            pnCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnInferior, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(pnTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnCentralLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btControle)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        pnCentralLayout.setVerticalGroup(
-            pnCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCentralLayout.createSequentialGroup()
-                .addComponent(pnTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addGroup(pnCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btControle, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addComponent(pnInferior, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnCentral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addComponent(jLabel1_TelaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jButton1_ControleDeConta, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnCentral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1_TelaPrincipal)
+                .addGap(85, 85, 85)
+                .addComponent(jButton1_ControleDeConta, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        // TODO add your handling code here:
-        new TelaPrincipal().setVisible(false);
+    private void jButton1_ControleDeContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1_ControleDeContaActionPerformed
+    
+        
         try {
-            new ControleDeConta().setVisible(true);
-        } catch (IOException ex) {
-            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+               ControleDeConta conta = new ControleDeConta();
+            this.setVisible(false);
+            conta.setVisible(true);
+               
+        } catch (Exception e) {
         }
-    }//GEN-LAST:event_btCadastrarActionPerformed
+    }//GEN-LAST:event_jButton1_ControleDeContaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,12 +142,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCadastrar;
-    private javax.swing.JButton btControle;
-    private javax.swing.JLabel lbPrincipal;
-    private javax.swing.JPanel pnCentral;
-    private javax.swing.JPanel pnInferior;
-    private javax.swing.JPanel pnTitulo;
+    private javax.swing.JButton jButton1_ControleDeConta;
+    private javax.swing.JLabel jLabel1_TelaPrincipal;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
    
