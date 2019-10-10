@@ -5,8 +5,9 @@
  */
 package view;
 
-import bd.ContaOBDC;
+import persistencia.PersistenciaConta;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -17,10 +18,21 @@ import modelo.Conta;
  * @author aluno
  */
 public class ControleDeConta extends javax.swing.JFrame {
-    
+
     public ControleDeConta() throws IOException {
-        
         initComponents();
+       
+        try {
+
+            PersistenciaConta persitenciaConta = new PersistenciaConta();
+            List<Conta> lista = persitenciaConta.listarConta();
+            lista.forEach((conta) -> {
+                jComboContas.addItem(conta.getNumeroConta());
+            });
+
+        } catch (Exception ex) {
+            Logger.getLogger(ControleDeConta.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -34,26 +46,29 @@ public class ControleDeConta extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jLabel2 = new javax.swing.JLabel();
         pnCentral = new javax.swing.JPanel();
         pnInferior = new javax.swing.JPanel();
         pnTitulo = new javax.swing.JPanel();
         lbPrincipal = new javax.swing.JLabel();
         pnTabela = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboContas = new javax.swing.JComboBox<>();
         lbBanco = new javax.swing.JLabel();
         tfBanco = new javax.swing.JTextField();
         lbConta = new javax.swing.JLabel();
         tfConta = new javax.swing.JTextField();
         lbAgencia = new javax.swing.JLabel();
         tfAgencia = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        rdAtiva = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rdInativa = new javax.swing.JRadioButton();
         tfSaldoInicial = new javax.swing.JTextField();
-        btApagar = new javax.swing.JButton();
         brCriar = new javax.swing.JButton();
         btAlterar = new javax.swing.JButton();
-        btSalvar = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
+
+        jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +91,17 @@ public class ControleDeConta extends javax.swing.JFrame {
         pnTabela.setBackground(new java.awt.Color(255, 255, 255));
         pnTabela.setLayout(new java.awt.GridLayout(8, 2, 25, 5));
 
+        jLabel3.setText("Contas:");
+        pnTabela.add(jLabel3);
+
+        jComboContas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboContas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboContasItemStateChanged(evt);
+            }
+        });
+        pnTabela.add(jComboContas);
+
         lbBanco.setText("Banco:");
         pnTabela.add(lbBanco);
         pnTabela.add(tfBanco);
@@ -88,23 +114,24 @@ public class ControleDeConta extends javax.swing.JFrame {
         pnTabela.add(lbAgencia);
         pnTabela.add(tfAgencia);
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Ativa");
-        pnTabela.add(jRadioButton1);
+        rdAtiva.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rdAtiva);
+        rdAtiva.setText("Ativa");
+        pnTabela.add(rdAtiva);
 
         jLabel1.setText("Saldo Inicial:");
         pnTabela.add(jLabel1);
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Inativa");
-        pnTabela.add(jRadioButton2);
+        rdInativa.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(rdInativa);
+        rdInativa.setText("Inativa");
+        rdInativa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdInativaActionPerformed(evt);
+            }
+        });
+        pnTabela.add(rdInativa);
         pnTabela.add(tfSaldoInicial);
-
-        btApagar.setBackground(new java.awt.Color(255, 255, 255));
-        btApagar.setText("Apagar");
-        pnTabela.add(btApagar);
 
         brCriar.setBackground(new java.awt.Color(255, 255, 255));
         brCriar.setText("Criar");
@@ -118,15 +145,6 @@ public class ControleDeConta extends javax.swing.JFrame {
         btAlterar.setBackground(new java.awt.Color(255, 255, 255));
         btAlterar.setText("Alterar");
         pnTabela.add(btAlterar);
-
-        btSalvar.setBackground(new java.awt.Color(255, 255, 255));
-        btSalvar.setText("Consultar");
-        btSalvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSalvarActionPerformed(evt);
-            }
-        });
-        pnTabela.add(btSalvar);
 
         btVoltar.setText("Voltar");
         btVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -176,11 +194,6 @@ public class ControleDeConta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        
-
-    }//GEN-LAST:event_btSalvarActionPerformed
-
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
 
     }//GEN-LAST:event_btVoltarActionPerformed
@@ -192,15 +205,48 @@ public class ControleDeConta extends javax.swing.JFrame {
             String conta = tfConta.getText();
             Float saldoInicial = Float.parseFloat(tfSaldoInicial.getText());
             String situacaoConta = "a";
-            
+
             Conta contaCorrente = new Conta(contaBanco, agenciaBanco, conta, saldoInicial, situacaoConta);
-            ContaOBDC contaObdc = new ContaOBDC();
+            PersistenciaConta contaObdc = new PersistenciaConta();
             contaObdc.inserirConta(contaCorrente);
         } catch (Exception ex) {
             Logger.getLogger(ControleDeConta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_brCriarActionPerformed
+
+    private void rdInativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdInativaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdInativaActionPerformed
+
+    private void jComboContasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboContasItemStateChanged
+        if (!jComboContas.getSelectedItem().equals("Incluir")) {
+            this.preencherDados(jComboContas.getSelectedItem().toString());
+        }
+    }//GEN-LAST:event_jComboContasItemStateChanged
+
+    public void preencherDados(String conta) {
+        try {
+            PersistenciaConta pConta = new PersistenciaConta();
+            Conta contaCorrente;
+            contaCorrente = pConta.buscarConta(conta);
+
+            tfConta.setText(contaCorrente.getNumeroConta());
+            tfAgencia.setText(contaCorrente.getAgenciaConta().toString());
+            tfBanco.setText(contaCorrente.getBancoConta().toString());
+            tfSaldoInicial.setText(contaCorrente.getSaldoInicialConta().toString());
+            if (contaCorrente.getSituacaoConta().equals("a")) {
+                rdAtiva.setSelected(true);
+                rdInativa.setSelected(false);
+            } else {
+                rdAtiva.setSelected(true);
+                rdInativa.setSelected(true);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(ControleDeConta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -244,13 +290,12 @@ public class ControleDeConta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton brCriar;
     private javax.swing.JButton btAlterar;
-    private javax.swing.JButton btApagar;
-    private javax.swing.JButton btSalvar;
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> jComboContas;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel lbAgencia;
     private javax.swing.JLabel lbBanco;
@@ -260,6 +305,8 @@ public class ControleDeConta extends javax.swing.JFrame {
     private javax.swing.JPanel pnInferior;
     private javax.swing.JPanel pnTabela;
     private javax.swing.JPanel pnTitulo;
+    private javax.swing.JRadioButton rdAtiva;
+    private javax.swing.JRadioButton rdInativa;
     private javax.swing.JTextField tfAgencia;
     private javax.swing.JTextField tfBanco;
     private javax.swing.JTextField tfConta;
