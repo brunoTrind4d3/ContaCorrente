@@ -108,6 +108,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         // TODO add your handling code here:
         new TelaPrincipal().setVisible(false);
+        this.dispose();
         try {
             new ControleDeConta().setVisible(true);
         } catch (IOException ex) {
