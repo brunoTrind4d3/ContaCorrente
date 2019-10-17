@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import modelo.Conta;
 
 /**
@@ -52,6 +53,7 @@ public class PersistenciaConta {
         } catch (SQLException e) {
             System.err.println("Erro ao inserir novo registro.");
             System.err.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 

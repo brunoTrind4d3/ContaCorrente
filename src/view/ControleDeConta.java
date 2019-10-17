@@ -5,6 +5,7 @@
  */
 package view;
 
+import enums.EnumBanco;
 import persistencia.PersistenciaConta;
 import java.io.IOException;
 import java.util.List;
@@ -19,9 +20,55 @@ import modelo.Conta;
  */
 public class ControleDeConta extends javax.swing.JFrame {
 
+    private final static String REGEX_ONLY_NUMBER = "[0-9]+";
+
     public ControleDeConta() throws IOException {
         initComponents();
         this.atualizarLista();
+        this.preencherComboBanco();
+    }
+
+    public void preencherComboBanco() {
+        for (EnumBanco banco : EnumBanco.values()) {
+            jComboBanco.addItem(banco.name());
+        }
+    }
+
+    public int selecionarValorBanco(String comboSelected) {
+        switch (jComboBanco.getSelectedItem().toString().trim()) {
+            case "ITAU":
+                return EnumBanco.ITAU.getCodigo();
+
+            case "BRADESCO":
+                return EnumBanco.BRADESCO.getCodigo();
+
+            case "CAIXA":
+                return EnumBanco.CAIXA.getCodigo();
+
+            case "SICOOB":
+                return EnumBanco.SICOOB.getCodigo();
+
+            case "SANTANDER":
+                return EnumBanco.SANTANDER.getCodigo();
+
+        }
+        return 0;
+    }
+    
+    public String verificarNomeBanco(int codigoBanco){
+        switch(codigoBanco){
+            case 1:
+                return EnumBanco.ITAU.name();
+            case 2:
+                return EnumBanco.SANTANDER.name();
+            case 3:
+                return EnumBanco.BRADESCO.name();
+            case 4:
+                return EnumBanco.CAIXA.name();
+            case 5:
+                return EnumBanco.SICOOB.name();    
+        }
+        return null;
     }
 
     /**
@@ -45,7 +92,7 @@ public class ControleDeConta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jComboContas = new javax.swing.JComboBox<>();
         lbBanco = new javax.swing.JLabel();
-        tfBanco = new javax.swing.JTextField();
+        jComboBanco = new javax.swing.JComboBox<>();
         lbConta = new javax.swing.JLabel();
         tfConta = new javax.swing.JTextField();
         lbAgencia = new javax.swing.JLabel();
@@ -106,9 +153,17 @@ public class ControleDeConta extends javax.swing.JFrame {
         lbBanco.setText("Banco:");
         pnTabela.add(lbBanco);
 
-        tfBanco.setFont(new java.awt.Font("Lucida Grande", 0, 12)); // NOI18N
-        tfBanco.setMinimumSize(new java.awt.Dimension(10, 35));
-        pnTabela.add(tfBanco);
+        jComboBanco.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBancoItemStateChanged(evt);
+            }
+        });
+        jComboBanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBancoActionPerformed(evt);
+            }
+        });
+        pnTabela.add(jComboBanco);
 
         lbConta.setText("Conta:");
         pnTabela.add(lbConta);
@@ -197,7 +252,7 @@ public class ControleDeConta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
-        
+
         TelaPrincipal tela = new TelaPrincipal();
         tela.setVisible(true);
         this.dispose();
@@ -206,7 +261,9 @@ public class ControleDeConta extends javax.swing.JFrame {
     private void brCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brCriarActionPerformed
         try {
             if (this.validarCampos()) {
-                Integer contaBanco = Integer.parseInt(tfBanco.getText());
+               
+
+                Integer contaBanco = selecionarValorBanco(jComboBanco.getSelectedItem().toString().trim());
                 Integer agenciaBanco = Integer.parseInt(tfAgencia.getText());
                 String conta = tfConta.getText();
                 Float saldoInicial = Float.parseFloat(tfSaldoInicial.getText());
@@ -253,7 +310,7 @@ public class ControleDeConta extends javax.swing.JFrame {
                 contaCorrente = pConta.buscarConta(jComboContas.getSelectedItem().toString());
 
                 contaCorrente.setAgenciaConta(Integer.parseInt(tfAgencia.getText()));
-                contaCorrente.setBancoConta(Integer.parseInt(tfBanco.getText()));
+                contaCorrente.setBancoConta(selecionarValorBanco(jComboBanco.getSelectedItem().toString().trim()));
                 contaCorrente.setNumeroConta(tfConta.getText());
                 contaCorrente.setSaldoInicialConta(Float.parseFloat(tfSaldoInicial.getText()));
                 if (rdAtiva.isSelected()) {
@@ -277,6 +334,14 @@ public class ControleDeConta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboContasActionPerformed
 
+    private void jComboBancoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBancoItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBancoItemStateChanged
+
+    private void jComboBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBancoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBancoActionPerformed
+
     public void preencherDados(String conta) {
         try {
             PersistenciaConta pConta = new PersistenciaConta();
@@ -285,7 +350,7 @@ public class ControleDeConta extends javax.swing.JFrame {
 
             tfConta.setText(contaCorrente.getNumeroConta());
             tfAgencia.setText(contaCorrente.getAgenciaConta().toString());
-            tfBanco.setText(contaCorrente.getBancoConta().toString());
+            jComboBanco.setSelectedItem(verificarNomeBanco(contaCorrente.getBancoConta()));
             tfSaldoInicial.setText(contaCorrente.getSaldoInicialConta().toString());
             if (contaCorrente.getSituacaoConta().equals("a")) {
                 rdAtiva.setSelected(true);
@@ -302,7 +367,6 @@ public class ControleDeConta extends javax.swing.JFrame {
 
     public void limparCampos() {
         this.tfAgencia.setText(null);
-        this.tfBanco.setText(null);
         this.tfAgencia.setText(null);
         this.tfSaldoInicial.setText(null);
         this.tfConta.setText(null);
@@ -325,19 +389,17 @@ public class ControleDeConta extends javax.swing.JFrame {
     }
 
     public boolean validarCampos() {
-        if (tfAgencia.getText().isEmpty()) {
+        
+        if (tfAgencia.getText().isEmpty() || !tfAgencia.getText().matches(REGEX_ONLY_NUMBER)) {
             JOptionPane.showMessageDialog(rootPane, "Campo agência deve ser diferente de nulo");
             return false;
         }
-        if (tfConta.getText().isEmpty()) {
+        if (tfConta.getText().isEmpty() || !tfConta.getText().matches(REGEX_ONLY_NUMBER)) {
             JOptionPane.showMessageDialog(rootPane, "Campo conta deve ser diferente de nulo");
             return false;
         }
-        if (tfBanco.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(rootPane, "Campo banco deve ser diferente de nulo");
-            return false;
-        }
-        if (tfSaldoInicial.getText().isEmpty()) {
+
+        if (tfSaldoInicial.getText().isEmpty() || !tfSaldoInicial.getText().matches(REGEX_ONLY_NUMBER)) {
             JOptionPane.showMessageDialog(rootPane, "Campo saldo inicial deve ser diferente de nulo");
             return false;
         }
@@ -388,6 +450,7 @@ public class ControleDeConta extends javax.swing.JFrame {
     private javax.swing.JButton btAlterar;
     private javax.swing.JButton btVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> jComboBanco;
     private javax.swing.JComboBox<String> jComboContas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -404,7 +467,6 @@ public class ControleDeConta extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdAtiva;
     private javax.swing.JRadioButton rdInativa;
     private javax.swing.JTextField tfAgencia;
-    private javax.swing.JTextField tfBanco;
     private javax.swing.JTextField tfConta;
     private javax.swing.JTextField tfSaldoInicial;
     // End of variables declaration//GEN-END:variables
