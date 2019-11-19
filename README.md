@@ -4,3 +4,5 @@
 
 
 ##### Aluno: Bruno Leonardo.
+
+##### Controle Bancario utilizando JPA, JAVA e Swing.
